@@ -19,6 +19,7 @@
                         pkgs.openssl
                         pkgs.cfssl
                         (python3.withPackages (py-pkgs: with py-pkgs; []))
+                        jre_minimal
                     ];
                 };
                 manifests = pkgs.mkShell {
@@ -64,6 +65,34 @@
                     modules = [
                         agenix.nixosModules.default
                         ./hosts/k8s-worker3.nix
+                    ];
+                }; 
+
+                cec-k8s-worker-medium1 = nixpkgs.lib.nixosSystem {
+                    inherit system;
+
+                    specialArgs = { inherit inputs; };
+                    modules = [
+                        agenix.nixosModules.default
+                        ./hosts/k8s-worker-medium1.nix
+                    ];
+                }; 
+                cec-k8s-worker-medium2 = nixpkgs.lib.nixosSystem {
+                    inherit system;
+
+                    specialArgs = { inherit inputs; };
+                    modules = [
+                        agenix.nixosModules.default
+                        ./hosts/k8s-worker-medium2.nix
+                    ];
+                }; 
+                cec-k8s-worker-medium3 = nixpkgs.lib.nixosSystem {
+                    inherit system;
+
+                    specialArgs = { inherit inputs; };
+                    modules = [
+                        agenix.nixosModules.default
+                        ./hosts/k8s-worker-medium3.nix
                     ];
                 }; 
             };

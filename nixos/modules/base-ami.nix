@@ -23,5 +23,8 @@
         "10.0.1.83" = [ "k8s-worker1" ];
         "10.0.1.107" = [ "k8s-worker2" ];
         "10.0.1.210" = [ "k8s-worker3" ];
+        "10.0.1.135" = [ "k8s-worker-medium1" ];
+        "10.0.1.17" = [ "k8s-worker-medium2" ];
+        "10.0.1.198" = [ "k8s-worker-medium3" ];
     };
 }

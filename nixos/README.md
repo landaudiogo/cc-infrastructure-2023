@@ -16,4 +16,7 @@ nixos-rebuild --flake .#cec-k8s-master --target-host root@34.253.139.248 switch
 nixos-rebuild --flake .#cec-k8s-worker1 --target-host root@108.132.235.40 switch
 nixos-rebuild --flake .#cec-k8s-worker2 --target-host root@34.249.239.191 switch
 nixos-rebuild --flake .#cec-k8s-worker3 --target-host root@34.248.168.117 switch
+nixos-rebuild --flake .#cec-k8s-worker-medium1 --target-host root@54.77.59.188 switch
+nixos-rebuild --flake .#cec-k8s-worker-medium2 --target-host root@54.220.253.212 switch
+nixos-rebuild --flake .#cec-k8s-worker-medium3 --target-host root@34.247.118.96 switch
 ```

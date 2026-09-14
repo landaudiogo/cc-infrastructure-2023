@@ -4,10 +4,23 @@ let
     k8s-worker1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIClJKW3djIHZ+BXRQ+XAz0GCpD638QKdq31uIToXNWzn root@ip-10-0-1-83.eu-west-1.compute.internal";
     k8s-worker2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyuvMEgFoQ6addEn/rZS1TpopmMVjucmI0NUW1RIfbc root@ip-10-0-1-107.eu-west-1.compute.internal";
     k8s-worker3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBs1h3EHuL2i6SGD1NPmtWku1YxjHCpBsLSOlZpt1HF0 root@ip-10-0-1-210.eu-west-1.compute.internal";
+    k8s-worker-medium1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJsi8rWE14VFJM4ArQ3SsKaaPhJQvITzxfGGyWL/Geg+ root@ip-10-0-1-135.eu-west-1.compute.internal";
+    k8s-worker-medium2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAGBtTGBDXCpiwm+QCZ9uby07bxDkPjyqSnxSMX/4Eh5 root@ip-10-0-1-17.eu-west-1.compute.internal";
+    k8s-worker-medium3 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBVMWgwdgCVKabm1nO1h6a7Vuy0DteGFX+pclhTMBADH root@ip-10-0-1-198.eu-west-1.compute.internal";
 in
 {
-    "apitoken.age".publicKeys = [ landaudiogo k8s-master k8s-worker1 k8s-worker2 k8s-worker3 ];
-    "root-ca.pem.age".publicKeys = [ landaudiogo k8s-master k8s-worker1 k8s-worker2 k8s-worker3 ];
+    "apitoken.age".publicKeys = [ 
+        landaudiogo 
+        k8s-master 
+        k8s-worker1 k8s-worker2 k8s-worker3 
+        k8s-worker-medium1 k8s-worker-medium2 k8s-worker-medium3 
+    ];
+    "root-ca.pem.age".publicKeys = [ 
+        landaudiogo 
+        k8s-master 
+        k8s-worker1 k8s-worker2 k8s-worker3
+        k8s-worker-medium1 k8s-worker-medium2 k8s-worker-medium3 
+    ];
     "root-ca-key.pem.age".publicKeys = [ landaudiogo k8s-master ];
     "creds-key.age".publicKeys = [ landaudiogo ];
     "creds-key.json.age".publicKeys = [ landaudiogo k8s-master ];
