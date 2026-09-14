@@ -1,0 +1,122 @@
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+  #   ports:
+  #     - "5050:80"
+  #   volumes:
+#     - pgadmin-data:/var/lib/pgadmin
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgadmin-pvc
+spec:
+  storageClassName: local-path
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgadmin
+spec:
+  type: ClusterIP
+  selector:
+    app: pgadmin
+  ports:
+    - port: 5050
+      targetPort: 80
+      name: pgadmin
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pgadmin
+  labels:
+    app: pgadmin
+spec:
+  restartPolicy: Always
+  resources:
+    requests:
+      cpu: 100m
+      memory: 500Mi
+    limits:
+      memory: 500Mi
+  containers:
+    - image: dpage/pgadmin4
+      name: pgadmin
+      env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: "d.landau@uu.nl"
+        - name: PGADMIN_DEFAULT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: PGADMIN_DEFAULT_PASSWORD
+      volumeMounts:
+        - name: data
+          mountPath: /var/lib/pgadmin
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: pgadmin-pvc
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: pgadmin-redirect
+spec:
+  parentRefs:
+    - name: eg
+      sectionName: http
+  hostnames:
+    - "pgadmin.cec.dlandau.nl"
+  rules:
+    # Let ACME HTTP-01 challenges through untouched
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /.well-known/acme-challenge/
+      backendRefs:
+        - group: ""
+          kind: Service
+          name: pgadmin
+          port: 5050
+    # Redirect everything else to HTTPS
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            scheme: https
+            statusCode: 301
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: pgadmin
+spec:
+  parentRefs:
+    - name: eg
+      sectionName: https.pgadmin.cec.dlandau.nl
+  hostnames:
+    - "pgadmin.cec.dlandau.nl"
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: pgadmin
+          port: 5050
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

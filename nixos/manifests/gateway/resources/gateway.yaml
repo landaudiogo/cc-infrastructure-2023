@@ -31,6 +31,15 @@ spec:
         certificateRefs:
         - kind: Secret
           name: creds.cec.dlandau.nl
+    - name: https.pgadmin.cec.dlandau.nl
+      protocol: HTTPS
+      hostname: pgadmin.cec.dlandau.nl
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+        - kind: Secret
+          name: pgadmin.cec.dlandau.nl
     - name: kafka1-ssl
       protocol: TCP
       port: 19092

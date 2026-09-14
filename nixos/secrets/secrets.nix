@@ -21,12 +21,15 @@ in
         k8s-worker1 k8s-worker2 k8s-worker3
         k8s-worker-medium1 k8s-worker-medium2 k8s-worker-medium3 
     ];
+
     "root-ca-key.pem.age".publicKeys = [ landaudiogo k8s-master ];
-    "creds-key.age".publicKeys = [ landaudiogo ];
     "creds-key.json.age".publicKeys = [ landaudiogo k8s-master ];
     "creds-backend.json.age".publicKeys = [ landaudiogo k8s-master ];
     "kafka-keystore.json.age".publicKeys = [ landaudiogo k8s-master ];
+    "database-secret.json.age".publicKeys = [ landaudiogo k8s-master ];
+
     "students.json.age".publicKeys = [ landaudiogo ];
     "groups.json.age".publicKeys = [ landaudiogo ];
+    "creds-key.age".publicKeys = [ landaudiogo ];
     "kafka-keystore-key.age".publicKeys = [ landaudiogo ];
 }
