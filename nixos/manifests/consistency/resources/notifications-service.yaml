@@ -61,12 +61,12 @@ spec:
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: demo-mock
+                  name: demo-consistency
                   key: SECRET_KEY
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: demo-mock
+                  name: demo-consistency
                   key: DATABASE_URL
             - name: RSA_PUBLIC_KEY
               value: /etc/secrets/ca.crt
