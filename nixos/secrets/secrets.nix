@@ -28,9 +28,17 @@ in
     "kafka-keystore.json.age".publicKeys = [ landaudiogo k8s-master ];
     "database-secret.json.age".publicKeys = [ landaudiogo k8s-master ];
     "demo-mock.json.age".publicKeys = [ landaudiogo k8s-master ];
+    "experiment-producer-mock-secret.json.age".publicKeys = [ landaudiogo k8s-master ];
+    "experiment-producer-consistency-secret.json.age".publicKeys = [ landaudiogo k8s-master ];
+    "experiment-producer-stress-secret.json.age".publicKeys = [ landaudiogo k8s-master ];
+    "database-init.json.age".publicKeys = [ landaudiogo k8s-master ];
 
     "students.json.age".publicKeys = [ landaudiogo ];
     "groups.json.age".publicKeys = [ landaudiogo ];
     "creds-key.age".publicKeys = [ landaudiogo ];
     "kafka-keystore-key.age".publicKeys = [ landaudiogo ];
+    "experiment-producer-mock.json.age".publicKeys = [ landaudiogo ];
+    "experiment-producer-consistency.json.age".publicKeys = [ landaudiogo ];
+    "experiment-producer-stress.json.age".publicKeys = [ landaudiogo ];
+    "init.sql.age".publicKeys = [ landaudiogo ];
 }
