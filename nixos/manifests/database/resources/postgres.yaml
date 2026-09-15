@@ -62,7 +62,16 @@ spec:
       volumeMounts:
         - name: data
           mountPath: /var/lib/postgresql/data
+        - name: init
+          mountPath: /docker-entrypoint-initdb.d
   volumes:
     - name: data
       persistentVolumeClaim:
         claimName: postgres-pvc
+
+    - name: init
+      secret:
+        secretName: database-init
+        items:
+          - key: init.sql
+            path: init.sql
