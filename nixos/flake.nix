@@ -18,7 +18,9 @@
                         agenix.outputs.packages.${system}.agenix
                         pkgs.openssl
                         pkgs.cfssl
-                        (python3.withPackages (py-pkgs: with py-pkgs; []))
+                        (python3.withPackages (py-pkgs: with py-pkgs; [
+                            jinja2
+                        ]))
                         jre_minimal
                         jq
                     ];

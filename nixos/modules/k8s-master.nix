@@ -74,20 +74,26 @@ in
     age.secrets.k8s-kafka-keystore.file = ../secrets/kafka-keystore.json.age;
     age.secrets.database-secret.file = ../secrets/database-secret.json.age;
     age.secrets.demo-mock.file = ../secrets/demo-mock.json.age;
+    age.secrets.demo-consistency.file = ../secrets/demo-consistency.json.age;
+    age.secrets.demo-stress.file = ../secrets/demo-stress.json.age;
     age.secrets.experiment-producer-mock.file = ../secrets/experiment-producer-mock-secret.json.age;
     age.secrets.experiment-producer-consistency.file = ../secrets/experiment-producer-consistency-secret.json.age;
     age.secrets.experiment-producer-stress.file = ../secrets/experiment-producer-stress-secret.json.age;
     age.secrets.database-init.file = ../secrets/database-init.json.age;
+    age.secrets.external-services.file = ../secrets/external-services.yaml.age;
     systemd.services.kube-addon-manager.preStart = ''
         ${pkgs.kubectl}/bin/kubectl apply \
             -f ${config.age.secrets.k8s-creds-key.path} \
             -f ${config.age.secrets.k8s-kafka-keystore.path} \
             -f ${config.age.secrets.database-secret.path} \
             -f ${config.age.secrets.demo-mock.path} \
+            -f ${config.age.secrets.demo-consistency.path} \
+            -f ${config.age.secrets.demo-stress.path} \
             -f ${config.age.secrets.experiment-producer-mock.path} \
             -f ${config.age.secrets.experiment-producer-consistency.path} \
             -f ${config.age.secrets.experiment-producer-stress.path} \
             -f ${config.age.secrets.database-init.path} \
+            -f ${config.age.secrets.external-services.path} \
             -f ${config.age.secrets.k8s-creds-backend.path}
     '';
 

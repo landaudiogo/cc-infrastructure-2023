@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-SECRET_NAME="demo-mock"
+SECRET_NAME="demo-consistency"
 
 script=$(basename "$0")
 script_d="$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)"
