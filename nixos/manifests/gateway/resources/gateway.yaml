@@ -40,6 +40,15 @@ spec:
         certificateRefs:
         - kind: Secret
           name: pgadmin.cec.dlandau.nl
+    - name: https.notifications.cec.dlandau.nl
+      protocol: HTTPS
+      hostname: notifications.cec.dlandau.nl
+      port: 443
+      tls:
+        mode: Terminate
+        certificateRefs:
+        - kind: Secret
+          name: notifications.cec.dlandau.nl
     - name: kafka1-ssl
       protocol: TCP
       port: 19092

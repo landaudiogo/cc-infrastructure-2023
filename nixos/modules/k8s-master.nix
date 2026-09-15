@@ -73,11 +73,13 @@ in
     age.secrets.k8s-creds-backend.file = ../secrets/creds-backend.json.age;
     age.secrets.k8s-kafka-keystore.file = ../secrets/kafka-keystore.json.age;
     age.secrets.database-secret.file = ../secrets/database-secret.json.age;
+    age.secrets.demo-mock.file = ../secrets/demo-mock.json.age;
     systemd.services.kube-addon-manager.preStart = ''
         ${pkgs.kubectl}/bin/kubectl apply \
             -f ${config.age.secrets.k8s-creds-key.path} \
             -f ${config.age.secrets.k8s-kafka-keystore.path} \
             -f ${config.age.secrets.database-secret.path} \
+            -f ${config.age.secrets.demo-mock.path} \
             -f ${config.age.secrets.k8s-creds-backend.path}
     '';
 

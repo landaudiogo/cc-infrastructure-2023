@@ -20,6 +20,7 @@
                         pkgs.cfssl
                         (python3.withPackages (py-pkgs: with py-pkgs; []))
                         jre_minimal
+                        jq
                     ];
                 };
                 manifests = pkgs.mkShell {
